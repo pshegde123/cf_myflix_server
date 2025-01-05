@@ -1,0 +1,24 @@
+{
+  "name": "myflix_package",
+  "version": "1.0.0",
+  "description": "myFlix API Package",
+  "homepage": "https://github.com/pshegde123/cf_myflix_server#readme",
+  "bugs": {
+    "url": "https://github.com/pshegde123/cf_myflix_server/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pshegde123/cf_myflix_server.git"
+  },
+  "license": "ISC",
+  "author": "pradnya",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "express": "^4.21.2"
+  }
+}

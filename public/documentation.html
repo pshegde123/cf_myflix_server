@@ -4,16 +4,262 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>myFlix Documentation</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
   <body>
-    <h1>myFlix Documentation</h1>
-    <p>
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odio asperiores
-      voluptatum provident doloribus expedita, explicabo voluptatem est quidem,
-      iusto nobis, at quod. Corrupti sit voluptate officia, sapiente at
-      laudantium omnis.
-    </p>
+    <div class="m-4">
+      <h1 class="display-2">API Documentation</h1>
+      <hr />
+      <table class="table table-striped table-bordered">
+        <thead>
+          <tr class="text-center">
+            <th scope="col">URL</th>
+            <th scope="col">Business Logic</th>
+            <th scope="col">HTTP Method</th>
+            <th scope="col">Query Parameters Data Type</th>
+            <th scope="col">Request Body Data Format</th>
+            <th scope="col">Response Body Data Format</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="text-center">/movies</td>
+            <td>Returns a list of ALL movies to the user</td>
+            <td>GET</td>
+            <td></td>
+            <td>None</td>
+            <td>A JSON object holding data about all the movies.</td>
+          </tr>
+          <tr>
+            <td class="text-center">/movies/:title</td>
+            <td>Returns data about a single movie</td>
+            <td>GET</td>
+            <td>title:String</td>
+            <td>None</td>
+            <td>
+              Return JSON object containing data (title, year, description, genre, 
+              director, imageURL) about a single movie.
+              <p>If the movie title is not found, a text error message "{title} not found"
+              is returned.</p>
+              <pre>
+Example: 
+{ 
+"title":"Avatar", 
+"year":"2009", 
+"description":"", 
+"genre":"Action, Adventure,Fantasy", 
+"director":"James Cameron", 
+"imageURL":""
+}
+              </pre>
+            </td>
+          </tr>
+          <tr>
+            <td class="text-center">/genre/:genrename</td>
+            <td>Get data about a genre by name</td>
+            <td>GET</td>
+            <td>genrename:String</td>
+            <td>None</td>
+            <td>
+              Returns description about that genre and a JSON array including movies of
+              that genre.<p>If the genre is not found, a text error message "Genre {genrename} not found"
+              is returned.</p>
+              <pre>
+Example:                
+{
+  "name": "Action",
+  description": "High-energy films packed with intense fight scenes, fast-paced choreography, and
+  adrenaline-pumping sequences that showcase the power and skill of martial artists in combat.",
+  "movies": [
+      {
+          "title": "Enter the Dragon",
+          ...
+      },
+      {
+          "title": "Drunken Master",
+          ...
+      }      
+  ]
+}
+</pre>
+            </td>
+          </tr>
+          <tr>
+            <td class="text-center">/directors/{dirname}</td>
+            <td>Get data about a director</td>
+            <td>GET</td>
+            <td>dirname:String</td>
+            <td>None</td>
+            <td>
+              Returns a JSON object containing data(bio, birth year, death year,movies) about given directors name. 
+              <p>If the director is not found, a text error message "Director name, {dirname} not found"
+                is returned.</p>
+              <pre>
+Example:
+{
+  "name": "Stephen Chow",
+  "bio": "Stephen Chow is a Hong Kong filmmaker, actor, and comedian, 
+  known for his unique blend of slapstick humor, visual effects, and martial arts.",
+  "birthYear": 1962,
+  "deathYear": null,
+  "movies": [
+      {
+          "title": "Kung Fu Hustle",
+          "releaseYear": 2004,
+          "genre": "Action",          
+      },
+      {
+          "title": "Shaolin Soccer",
+          "releaseYear": 2001,
+          "genre": "Action",          
+      }
+  ]
+}
+              </pre>
+            </td>
+          </tr>
+          <tr>
+            <td class="text-center">/users/adduser</td>
+            <td>Register a new user</td>
+            <td>POST</td>
+            <td>None</td>
+            <td>A JSON object holding data about user to add ,structured like:
+              <pre>
+{
+  "username":"moviebuff",
+  "email":"james@example.com",
+  "password":"xxxxxx",
+  "secret-question":"In which city were you born?",
+  "secret-answer":"Atlanta"
+}
+              </pre>
+            </td>
+            <td>
+              A text message indicating that new user was added. Response also include a response JSON object with a new unique ID:
+              <pre>
+{
+  "ID":4,
+  "username":"moviebuff",
+  "email":"james@example.com",
+  "password":"xxxxxx",
+  "secret-question":"In which city were you born?",
+  "secret-answer":"Atlanta"
+}
+              </pre>            
+            </td>
+          </tr>
+          <tr>
+            <td class="text-center">/users/{username}</td>
+            <td>Allow users to update user info</td>
+            <td>PUT</td>
+            <td>username:String</td>
+            <td>A JSON object holding updated user info,structured like:
+              <pre>
+{
+  "username":"moviebuff",
+  "email":"james@example.com",
+  "new_secretanswer":"Atlanta,GA,USA", 
+}
+              </pre>
+            </td>
+            <td>
+              A JSON object holding data about the user that was updated.
+              <p>If the user is not found, a text error message "{username} not found"
+                is returned.</p>
+              <pre>
+Example:                
+{ 
+  "username":"moviebuff", 
+  "secret-answer":"Atlanta,GA,USA"
+}
+              </pre>            
+            </td>
+          </tr>
+          <tr>
+            <td class="text-center">/users/{username}/favorites</td>
+            <td>Allow users to add a movie info to favorites list</td>
+            <td>POST</td>
+            <td>None</td>
+            <td>A JSON object holding the movie info to be added to favorites list,structured like:
+              <pre>
+Example:
+{
+  "Title": "The Avengers",
+  "Year": "2012",
+  "Rated": "PG-13",
+  "Genre": "Action, Sci-Fi, Thriller",
+  "Director": "Joss Whedon",
+  "Images": ""  
+}
+              </pre>
+            </td>
+            <td>
+              A text message indicating whether the movie info was added successfully.
+            </td>
+          </tr>
+          <tr>
+            <td class="text-center">/users/{username}/favorites/{movieid}</td>
+            <td>Remove a movie from favorites list</td>
+            <td>DELETE</td>
+            <td>username:String, movieid:Number</td>
+            <td>
+              None
+            </td>
+            <td>
+              A text message indicating whether the movie info was added successfully.
+            </td>
+          </tr>
+          <tr>
+            <td class="text-center">/users/{username}/favorites</td>
+            <td>Allow users to add a movie info to favorites list</td>
+            <td>POST</td>
+            <td>None</td>
+            <td>A JSON object holding the movie info to be added to favorites list,structured like:
+              <pre>
+Example:
+{
+  "Title": "The Avengers",
+  "Year": "2012",
+  "Rated": "PG-13",
+  "Genre": "Action, Sci-Fi, Thriller",
+  "Director": "Joss Whedon",
+  "Images": ""  
+}
+              </pre>
+            </td>
+            <td>
+              A text message indicating whether the movie info was added successfully.
+            </td>
+          </tr>
+          <tr>
+            <td class="text-center">/users/{username}</td>
+            <td>Remove/deregister an user</td>
+            <td>DELETE</td>
+            <td>username:String</td>
+            <td>
+              None
+            </td>
+            <td>
+              A text message indicating that user email has been removed.
+              <p>
+                If the user does not exist, a text error message "{username} not found"
+                is returned.</p>            
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>

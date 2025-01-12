@@ -20,9 +20,9 @@
       <table class="table table-striped table-bordered">
         <thead>
           <tr class="text-center">
+            <th scope="col">HTTP Method</th>
             <th scope="col">URL</th>
             <th scope="col">Business Logic</th>
-            <th scope="col">HTTP Method</th>
             <th scope="col">Query Parameters Data Type</th>
             <th scope="col">Request Body Data Format</th>
             <th scope="col">Response Body Data Format</th>
@@ -30,24 +30,29 @@
         </thead>
         <tbody>
           <tr>
+            <td>GET</td>
             <td class="text-center">/movies</td>
             <td>Returns a list of ALL movies to the user</td>
-            <td>GET</td>
             <td></td>
             <td>None</td>
             <td>A JSON object holding data about all the movies.</td>
           </tr>
           <tr>
+            <td>GET</td>
             <td class="text-center">/movies/:title</td>
             <td>Returns data about a single movie</td>
-            <td>GET</td>
-            <td>title:String</td>
+            <td>
+              title:String
+              <p>Example:"movies/Avengers"</p>
+            </td>
             <td>None</td>
             <td>
-              Return JSON object containing data (title, year, description, genre, 
-              director, imageURL) about a single movie.
-              <p>If the movie title is not found, a text error message "{title} not found"
-              is returned.</p>
+              Return JSON object containing data (title, year, description,
+              genre, director, imageURL) about a single movie.
+              <p>
+                If the movie title is not found, a text error message "{title}
+                not found" is returned.
+              </p>
               <pre>
 Example: 
 { 
@@ -62,15 +67,21 @@ Example:
             </td>
           </tr>
           <tr>
+            <td>GET</td>
             <td class="text-center">/genre/:genrename</td>
             <td>Get data about a genre by name</td>
-            <td>GET</td>
-            <td>genrename:String</td>
+            <td>
+              genrename:String
+              <p>Example:/genre/Drama</p>
+            </td>
             <td>None</td>
             <td>
-              Returns description about that genre and a JSON array including movies of
-              that genre.<p>If the genre is not found, a text error message "Genre {genrename} not found"
-              is returned.</p>
+              Returns description about that genre and a JSON array including
+              movies of that genre.
+              <p>
+                If the genre is not found, a text error message "Genre
+                {genrename} not found" is returned.
+              </p>
               <pre>
 Example:                
 {
@@ -88,19 +99,26 @@ Example:
       }      
   ]
 }
-</pre>
+</pre
+              >
             </td>
           </tr>
           <tr>
+            <td>GET</td>
             <td class="text-center">/directors/{dirname}</td>
             <td>Get data about a director</td>
-            <td>GET</td>
-            <td>dirname:String</td>
+            <td>
+              dirname:String
+              <p>Example: /directors/Stephen%20Chow</p>
+            </td>
             <td>None</td>
             <td>
-              Returns a JSON object containing data(bio, birth year, death year,movies) about given directors name. 
-              <p>If the director is not found, a text error message "Director name, {dirname} not found"
-                is returned.</p>
+              Returns a JSON object containing data(bio, birth year, death
+              year,movies) about given directors name.
+              <p>
+                If the director is not found, a text error message "Director
+                name, {dirname} not found" is returned.
+              </p>
               <pre>
 Example:
 {
@@ -126,131 +144,121 @@ Example:
             </td>
           </tr>
           <tr>
+            <td>POST</td>
             <td class="text-center">/users/adduser</td>
             <td>Register a new user</td>
-            <td>POST</td>
             <td>None</td>
-            <td>A JSON object holding data about user to add ,structured like:
+            <td>
+              A JSON object holding data about user to add ,structured like:
               <pre>
 {
   "username":"moviebuff",
   "email":"james@example.com",
-  "password":"xxxxxx",
-  "secret-question":"In which city were you born?",
-  "secret-answer":"Atlanta"
+  "password":"xxxxxx", 
+  "birth_date" = "1997-04-15"
 }
               </pre>
             </td>
             <td>
-              A text message indicating that new user was added. Response also include a response JSON object with a new unique ID:
+              Response include a JSON object with a new unique ID:
               <pre>
 {
-  "ID":4,
+  "ID":XXX,
   "username":"moviebuff",
   "email":"james@example.com",
   "password":"xxxxxx",
-  "secret-question":"In which city were you born?",
-  "secret-answer":"Atlanta"
+  "birth_date" = "1997-04-15"
 }
-              </pre>            
+              </pre>
             </td>
           </tr>
           <tr>
+            <td>PUT</td>
             <td class="text-center">/users/{username}</td>
             <td>Allow users to update user info</td>
-            <td>PUT</td>
-            <td>username:String</td>
-            <td>A JSON object holding updated user info,structured like:
+            <td>
+              username:String
+              <p>Example:/users/moviebuff</p>
+            </td>
+            <td>
+              A JSON object holding updated user info,structured like:
               <pre>
-{
-  "username":"moviebuff",
-  "email":"james@example.com",
-  "new_secretanswer":"Atlanta,GA,USA", 
+{  
+  "email":"jamesdoe@example.com", 
 }
               </pre>
             </td>
             <td>
               A JSON object holding data about the user that was updated.
-              <p>If the user is not found, a text error message "{username} not found"
-                is returned.</p>
+              <p>
+                If the user is not found, a text error message "{username} not
+                found" is returned.
+              </p>
               <pre>
 Example:                
-{ 
-  "username":"moviebuff", 
-  "secret-answer":"Atlanta,GA,USA"
-}
-              </pre>            
-            </td>
-          </tr>
-          <tr>
-            <td class="text-center">/users/{username}/favorites</td>
-            <td>Allow users to add a movie info to favorites list</td>
-            <td>POST</td>
-            <td>None</td>
-            <td>A JSON object holding the movie info to be added to favorites list,structured like:
-              <pre>
-Example:
 {
-  "Title": "The Avengers",
-  "Year": "2012",
-  "Rated": "PG-13",
-  "Genre": "Action, Sci-Fi, Thriller",
-  "Director": "Joss Whedon",
-  "Images": ""  
+  "username":"moviebuff",
+  "email":"jamesdoe@example.com",
+  "password":"xxxxxx", 
+  "birth_date" = "1997-04-15"
 }
               </pre>
             </td>
+          </tr>
+          <tr>
+            <td>POST</td>
+            <td class="text-center">/users/{username}/movies/:movieid</td>
+            <td>Allow users to add a movie id to favorites list</td>
             <td>
-              A text message indicating whether the movie info was added successfully.
+              MovieID:String
+              <p>Example:/users/testuser1/movies/6781d292035202ff96cb0ced</p>
+            </td>
+            <td>None</td>
+            <td>
+              Response include a JSON user object with updated favorites list.
+              <pre>
+                {
+                  "ID":XXX,
+                  "username":"moviebuff",
+                  "email":"james@example.com",
+                  "password":"xxxxxx",
+                  "birth_date" = "1997-04-15"
+                  "favorites":["6781d292035202ff96cb0ced"]
+                }
+              </pre>
             </td>
           </tr>
           <tr>
-            <td class="text-center">/users/{username}/favorites/{movieid}</td>
-            <td>Remove a movie from favorites list</td>
             <td>DELETE</td>
-            <td>username:String, movieid:Number</td>
-            <td>
-              None
-            </td>
-            <td>
-              A text message indicating whether the movie info was added successfully.
-            </td>
-          </tr>
-          <tr>
-            <td class="text-center">/users/{username}/favorites</td>
-            <td>Allow users to add a movie info to favorites list</td>
-            <td>POST</td>
+            <td class="text-center">/users/{username}/movies/{movieid}</td>
+            <td>Remove a movie from favorites list</td>
+            <td>username:String, movieid:String <p>Example:/users/testuser1/movies/6781d292035202ff96cb0ced</p></td>
             <td>None</td>
-            <td>A JSON object holding the movie info to be added to favorites list,structured like:
-              <pre>
-Example:
-{
-  "Title": "The Avengers",
-  "Year": "2012",
-  "Rated": "PG-13",
-  "Genre": "Action, Sci-Fi, Thriller",
-  "Director": "Joss Whedon",
-  "Images": ""  
-}
-              </pre>
-            </td>
             <td>
-              A text message indicating whether the movie info was added successfully.
+              Response include a JSON user object with updated favorites list.
+              <pre>
+                {
+                  "ID":XXX,
+                  "username":"moviebuff",
+                  "email":"james@example.com",
+                  "password":"xxxxxx",
+                  "birth_date" = "1997-04-15"
+                  "favorites":[]
+                }
             </td>
-          </tr>
+          </tr>          
           <tr>
+            <td>DELETE</td>
             <td class="text-center">/users/{username}</td>
             <td>Remove/deregister an user</td>
-            <td>DELETE</td>
             <td>username:String</td>
-            <td>
-              None
-            </td>
+            <td>None</td>
             <td>
               A text message indicating that user email has been removed.
               <p>
-                If the user does not exist, a text error message "{username} not found"
-                is returned.</p>            
+                If the user does not exist, a text error message "{username} not
+                found" is returned.
+              </p>
             </td>
           </tr>
         </tbody>

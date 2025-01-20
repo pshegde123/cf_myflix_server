@@ -43,17 +43,10 @@ require("./passport");
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });*/
-/*mongoose.connect(process.env.CONNECTION_URI, {
+mongoose.connect(process.env.CONNECTION_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-});*/
-mongoose.connect(
-  "mongodb+srv://admin:admin@myflixdb.tfdv1.mongodb.net/?retryWrites=true&w=majority&appName=myFlixDB",
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  }
-);
+});
 
 //middleware
 app.use(morgan("common"));

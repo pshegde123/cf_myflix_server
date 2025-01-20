@@ -39,7 +39,11 @@ const passport = require("passport");
 require("./passport");
 
 //Connect with Mongo DB
-mongoose.connect("mongodb://localhost:27017/myflixDB", {
+/*mongoose.connect("mongodb://localhost:27017/myflixDB", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});*/
+mongoose.connect(process.env.CONNECTION_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });

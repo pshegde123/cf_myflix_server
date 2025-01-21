@@ -5,9 +5,8 @@ Welcome to the myFlix API! This is a RESTful API that provides users with the ab
 ## Table of Contents
 
 - [Installation](#installation)
-- [Usage](#usage)
 - [Endpoints](#endpoints)
-- [License](#license)
+
 
 ## Installation
 
@@ -40,7 +39,7 @@ The server will start and you can make requests to the API using Postman or any 
 ```bash
 http://localhost:8080
 ```
-**Endpoints**
+## Endpoints
 
 Here is a brief overview of the available API endpoints:
 

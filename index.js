@@ -57,23 +57,19 @@ app.get("/", (req, res) => {
 });
 
 // Get all movies
-app.get(
-  "/movies",
-  passport.authenticate("jwt", { session: false }),
-  async (req, res) => {
-    await Movies.find()
-      .then((movies) => {
-        res.status(201).json(movies);
-      })
-      .catch((err) => {
-        console.error(err);
-        res.status(500).json({
-          message:
-            "Something went wrong while fetching the movies. Please try again later.",
-        });
+app.get("/movies", async (req, res) => {
+  await Movies.find()
+    .then((movies) => {
+      res.status(201).json(movies);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).json({
+        message:
+          "Something went wrong while fetching the movies. Please try again later.",
       });
-  }
-);
+    });
+});
 
 // Get a movie by title
 app.get("/movies/:Title", async (req, res) => {

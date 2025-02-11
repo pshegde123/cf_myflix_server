@@ -16,7 +16,7 @@ app.use(express.urlencoded({ extended: true })); // Import body parser
 
 const cors = require("cors");
 /*app.use(cors());*/
-let allowedOrigins = ["http://localhost:8080", "http://localhost:1234","http://testsite.com"];
+let allowedOrigins = ["http://localhost:8080", "http://localhost:1234","http://testsite.com","https://react-myflix.netlify.app/signup"];
 
 app.use(
   cors({

@@ -225,8 +225,8 @@ app.put(
       return res.status(400).send("Permission denied");
     }
     // CONDITION ENDS
-    console.log("Request params=",req.params);
-     console.log("Request body=",req.body);
+    //console.log("Request params=",req.params);
+    //console.log("Request body=",req.body);
     
     await Users.findOneAndUpdate(
       { Username: req.params.Username },
@@ -241,7 +241,7 @@ app.put(
       { new: true }
     ) // This line makes sure that the updated document is returned
       .then((updatedUser) => {
-         console.log("Response =",updatedUser);
+         //console.log("Response =",updatedUser);
         res.json(updatedUser);
       })
       .catch((err) => {

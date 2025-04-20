@@ -226,6 +226,7 @@ app.put(
     }
     // CONDITION ENDS
     console.log("Request params=",req.params);
+     console.log("Request body=",req.body);
     
     await Users.findOneAndUpdate(
       { Username: req.params.Username },

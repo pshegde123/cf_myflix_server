@@ -56,6 +56,11 @@ app.get("/", (req, res) => {
   res.send("Welcome to myFlix!");
 });
 
+// GET welcome/landing page requests
+app.get("/welcome", (req, res) => {
+  res.send("Welcome to myFlix!");
+});
+
 // Get all movies
 app.get("/movies", async (req, res) => {
   await Movies.find()
